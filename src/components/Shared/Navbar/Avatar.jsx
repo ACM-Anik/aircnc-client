@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import avatarImg from "../../../assets/images/placeholder.jpg";
 import { AuthContext } from '../../../providers/AuthProvider';
 
