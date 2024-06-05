@@ -15,7 +15,24 @@ const Login = () => {
     } = useContext(AuthContext);
     const navigate = useNavigate();
 
-    // 
+    // HandleSubmit
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        const email = event.target.email.value;
+        const password = event.target.password.value;
+        // console.log('email', email)
+        // console.log('password', password)
+        signIn()
+            .then(result => {
+                console.log('result.user', result.user)
+                navigate('/');
+            })
+            .catch(error => {
+                setLoading(false);
+                console.log(error.message);
+                toast.error(error.message);
+            })
+    };
 
     // Handle Google signIn
     const handleGoogleSignIn = () => {
@@ -41,6 +58,7 @@ const Login = () => {
                     </p>
                 </div>
                 <form
+                    onSubmit={handleSubmit}
                     noValidate=''
                     action=''
                     className='space-y-6 ng-untouched ng-pristine ng-valid'
@@ -82,7 +100,7 @@ const Login = () => {
                             type='submit'
                             className='bg-rose-500 w-full rounded-md py-3 text-white'
                         >
-                            {loading ? <TbFidgetSpinner size={24} className="m-auto animate-spin"></TbFidgetSpinner> :"Continue"}
+                            {loading ? <TbFidgetSpinner size={24} className="m-auto animate-spin"></TbFidgetSpinner> : "Continue"}
                         </button>
                     </div>
                 </form>
@@ -98,9 +116,9 @@ const Login = () => {
                     </p>
                     <div className='flex-1 h-px sm:w-16 dark:bg-gray-700'></div>
                 </div>
-                <div 
-                onClick={handleGoogleSignIn}
-                className='flex justify-center items-center space-x-2 border m-3 p-2 border-gray-300 border-rounded cursor-pointer'>
+                <div
+                    onClick={handleGoogleSignIn}
+                    className='flex justify-center items-center space-x-2 border m-3 p-2 border-gray-300 border-rounded cursor-pointer'>
                     <FcGoogle size={32} />
                     <p>Continue with Google</p>
                 </div>
