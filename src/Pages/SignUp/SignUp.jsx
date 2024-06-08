@@ -19,11 +19,32 @@ const SignUp = () => {
     const emailRef = useRef();
 
 
-     // Handle Google signIn
-     const handleGoogleSignIn = () => {
+    // HandleSubmit user registration:-
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        const name = event.target.name.value;
+        const email = event.target.email.value;
+        const password = event.target.password.value;
+        const photo = event.target.photo.value;
+
+        createUser(email, password)
+            .then(result => {
+                console.log(result.user);
+                navigate(from, { replace: true });
+
+            })
+            .catch(error => {
+                setLoading(false);
+                console.log(error.message);
+                toast.error(error.message);
+            });
+    };
+
+    // Handle Google signIn
+    const handleGoogleSignIn = () => {
         signInWithGoogle()
             .then(result => {
-                console.log('result.user', result.user)
+                console.log(result.user);
                 navigate(from, { replace: true });
             })
             .catch(error => {
@@ -42,6 +63,7 @@ const SignUp = () => {
                     <p className='text-sm text-gray-400'>Welcome to AirCNC</p>
                 </div>
                 <form
+                    onSubmit={handleSubmit}
                     noValidate=''
                     action=''
                     className='space-y-6 ng-untouched ng-pristine ng-valid'
@@ -119,9 +141,9 @@ const SignUp = () => {
                     </p>
                     <div className='flex-1 h-px sm:w-16 dark:bg-gray-700'></div>
                 </div>
-                <div 
-                onClick={handleGoogleSignIn}
-                className='flex justify-center items-center space-x-2 border m-3 p-2 border-gray-300 border-rounded cursor-pointer'>
+                <div
+                    onClick={handleGoogleSignIn}
+                    className='flex justify-center items-center space-x-2 border m-3 p-2 border-gray-300 border-rounded cursor-pointer'>
                     <FcGoogle size={32} />
 
                     <p>Continue with Google</p>
