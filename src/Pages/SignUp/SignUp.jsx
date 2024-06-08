@@ -25,16 +25,45 @@ const SignUp = () => {
         const name = event.target.name.value;
         const email = event.target.email.value;
         const password = event.target.password.value;
-        const photo = event.target.photo.value;
+        // Image upload
+        const image = event.target.image.files[0];
+        const formData = new FormData();
+        formData.append('image', image);
 
-        createUser(email, password)
-            .then(result => {
-                console.log(result.user);
-                navigate(from, { replace: true });
+        const url = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMGBB_KEY}`;
 
+        fetch(url, {
+            method: 'POST',
+            body: formData,
+        })
+            .then(res => res.json())
+            .then(imageData => {
+                const imageURL = imageData.data.display_url;
+
+                createUser(email, password)
+                    .then(result => {
+                        console.log(result.user);
+                        updateUserProfile(name, imageURL)
+                            .then(() => {
+                                toast.success("Successful");
+                                navigate(from, { replace: true });
+                            })
+                            .catch(error => {
+                                setLoading(false);
+                                console.log(error.message);
+                                toast.error(error.message);
+                            });
+
+                        navigate(from, { replace: true });
+
+                    })
+                    .catch(error => {
+                        setLoading(false);
+                        console.log(error.message);
+                        toast.error(error.message);
+                    });
             })
             .catch(error => {
-                setLoading(false);
                 console.log(error.message);
                 toast.error(error.message);
             });
