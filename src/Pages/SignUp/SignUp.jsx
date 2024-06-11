@@ -1,6 +1,6 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc';
-import { useContext, useRef } from 'react';
+import { useContext } from 'react';
 import { AuthContext } from '../../providers/AuthProvider';
 import toast from 'react-hot-toast';
 import { TbFidgetSpinner } from "react-icons/tb";
@@ -16,7 +16,6 @@ const SignUp = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || "/";
-    const emailRef = useRef();
 
 
     // HandleSubmit user registration:-
@@ -25,13 +24,12 @@ const SignUp = () => {
         const name = event.target.name.value;
         const email = event.target.email.value;
         const password = event.target.password.value;
-        // Image upload
+        // Image upload:-
         const image = event.target.image.files[0];
         const formData = new FormData();
         formData.append('image', image);
 
         const url = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMGBB_KEY}`;
-
         fetch(url, {
             method: 'POST',
             body: formData,
@@ -78,7 +76,7 @@ const SignUp = () => {
                 setLoading(false);
                 console.log(error.message);
                 toast.error(error.message);
-            })
+            });
     };
 
 
@@ -157,7 +155,7 @@ const SignUp = () => {
                             type='submit'
                             className='bg-rose-500 w-full rounded-md py-3 text-white'
                         >
-                            Continue
+                            {loading ? <TbFidgetSpinner size={24} className="m-auto animate-spin"></TbFidgetSpinner> : "Continue"}
                         </button>
                     </div>
                 </form>

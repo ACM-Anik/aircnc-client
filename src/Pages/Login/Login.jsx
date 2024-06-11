@@ -4,7 +4,6 @@ import { useContext, useRef } from 'react';
 import { AuthContext } from '../../providers/AuthProvider';
 import toast from 'react-hot-toast';
 import { TbFidgetSpinner } from "react-icons/tb";
-import { ConfirmToast } from 'react-confirm-toast'
 
 const Login = () => {
     const {
