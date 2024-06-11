@@ -4,6 +4,7 @@ import { useContext, useRef } from 'react';
 import { AuthContext } from '../../providers/AuthProvider';
 import toast from 'react-hot-toast';
 import { TbFidgetSpinner } from "react-icons/tb";
+import { ConfirmToast } from 'react-confirm-toast'
 
 const Login = () => {
     const {
@@ -23,8 +24,6 @@ const Login = () => {
         event.preventDefault();
         const email = event.target.email.value;
         const password = event.target.password.value;
-        // console.log('email', email)
-        // console.log('password', password)
         signIn(email, password)
             .then(result => {
                 console.log(result.user);
@@ -54,7 +53,7 @@ const Login = () => {
     // Handle Password reset:-
     const handlePasswordReset = () => {
         const email = emailRef.current.value;
-        resetPassword(email)
+        resetPassword(!email)
             .then(() => {
                 toast.success("Please check your email for reset link.");
                 setLoading(false);
@@ -62,6 +61,7 @@ const Login = () => {
             .catch(error => {
                 console.log(error.message);
                 toast.error(error.message);
+                setLoading(false);
             })
     };
 
@@ -125,7 +125,8 @@ const Login = () => {
                 <div className='space-y-1'>
                     <button
                         onClick={handlePasswordReset}
-                        className='text-xs hover:underline hover:text-rose-500 text-gray-400'>
+                        className='text-xs hover:underline hover:text-rose-500 text-gray-400'
+                    >
                         Forgot password?
                     </button>
                 </div>
