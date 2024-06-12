@@ -1,4 +1,4 @@
-import { ScaleLoader } from 'react-spinners';
+// import { ScaleLoader } from "react-spinners";
 
 const Loader = () => {
   return (
@@ -9,9 +9,11 @@ const Loader = () => {
       flex-col 
       justify-center 
       items-center 
+      font-bold
     '
     >
-      <ScaleLoader size={100} color='red' />
+      {/* <ScaleLoader size={100} color='red' /> */}
+      Loading...
     </div>
   )
 }
