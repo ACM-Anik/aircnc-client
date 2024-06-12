@@ -1,4 +1,4 @@
-import HeartButton from '../Button/HeartButton'
+import HeartButton from '../Button/HeartButton';
 
 const Card = () => {
   return (
