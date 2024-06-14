@@ -4,7 +4,6 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 
 const CategoryBox = ({ label, icon: Icon }) => {
     const [params, setParams] = useSearchParams();
-    const value = params.get('category');
     const navigate = useNavigate();
 
     const handleClick = () => {
@@ -25,8 +24,6 @@ const CategoryBox = ({ label, icon: Icon }) => {
         );
         navigate(url);
     };
-
-    console.log(value);
 
     return (
         <div onClick={handleClick} className="flex flex-col items-center justify-center gap-2 p-3 border-b-2 hover:text-neutral-800 border-transparent text-neutral-500">
