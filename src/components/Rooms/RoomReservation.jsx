@@ -1,5 +1,6 @@
 import React from 'react';
 import Calender from './Calender';
+import Button from '../Button/Button';
 
 const RoomReservation = () => {
     return (
@@ -8,7 +9,16 @@ const RoomReservation = () => {
                 <div className="text-2xl font-semibold">$ 200</div>
                 <div className="text-neutral-600 font-light">night</div>
             </div>
+            <hr />
             <Calender></Calender>
+            <hr />
+            <div className="p-4">
+                <Button label="Reserve"></Button>
+            </div>
+            <div className="p-4 flex flex-row items-center justify-between font-semibold text-lg">
+                <div>Total</div>
+                <div>$ 300</div>
+            </div>
         </div>
     );
 };
