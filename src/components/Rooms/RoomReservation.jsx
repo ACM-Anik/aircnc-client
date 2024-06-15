@@ -1,4 +1,5 @@
 import React from 'react';
+import Calender from './Calender';
 
 const RoomReservation = () => {
     return (
@@ -7,7 +8,7 @@ const RoomReservation = () => {
                 <div className="text-2xl font-semibold">$ 200</div>
                 <div className="text-neutral-600 font-light">night</div>
             </div>
-            <div className="">Calender</div>
+            <Calender></Calender>
         </div>
     );
 };
