@@ -44,6 +44,7 @@ const SignUp = () => {
                         updateUserProfile(name, imageURL)
                             .then(() => {
                                 toast.success("SignUp successful");
+                                // Save user to DB
                                 navigate(from, { replace: true });
                             })
                             .catch(error => {
@@ -70,6 +71,7 @@ const SignUp = () => {
         signInWithGoogle()
             .then(result => {
                 console.log(result.user);
+                // Save user to DB
                 navigate(from, { replace: true });
             })
             .catch(error => {

@@ -40,6 +40,7 @@ const Login = () => {
         signInWithGoogle()
             .then(result => {
                 console.log('result.user', result.user)
+                // Save user to DB
                 navigate(from, { replace: true });
             })
             .catch(error => {
@@ -61,7 +62,7 @@ const Login = () => {
                 console.log(error.message);
                 toast.error(error.message);
                 setLoading(false);
-            })
+            });
     };
 
     return (
