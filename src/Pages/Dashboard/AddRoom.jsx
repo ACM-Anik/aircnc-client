@@ -1,5 +1,6 @@
 import react, { useState } from 'react';
 import AddRoomForm from '../../components/Forms/AddRoomForm';
+import { imageUpload } from '../../api/utils';
 
 const AddRoom = () => {
     const [loading, setLoading] = useState(false);
@@ -12,8 +13,8 @@ const AddRoom = () => {
         const location = event.target.location.value;
         const category = event.target.category.value;
         const title = event.target.title.value;
-        const from = dates.startDate;
-        const to = dates.endDate;
+        // const from = dates.startDate;
+        // const to = dates.endDate;
         const price = event.target.price.value;
         const total_guest = event.target.total_guest.value;
         const bedrooms = event.target.bedrooms.value;
@@ -22,15 +23,27 @@ const AddRoom = () => {
         console.log(location);
         console.log(category);
         console.log(title);
-        console.log(from);
-        console.log(to);
+        // console.log(from);
+        // console.log(to);
         console.log(price);
         console.log(total_guest);
         console.log(bedrooms);
         console.log(description);
         console.log(image);
+
+        // upload image 
+        imageUpload(image)
+            .then(result => {
+                console.log(result.data.display_url);
+                setLoading(false);
+            })
+            .catch(err => {
+                console.log(err.message);
+                setLoading(false);
+            })
     };
 
+    // Handle the name-changing in the image upload button:-
     const handleImageChange = (image) => {
         setUploadButtonText(image.name)
     };
