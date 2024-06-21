@@ -3,6 +3,7 @@ import AddRoomForm from '../../components/Forms/AddRoomForm';
 
 const AddRoom = () => {
     const [loading, setLoading] = useState(false);
+    const [uploadButtonText, setUploadButtonText] = useState("Upload Image");
 
     //handle form submit:-
     const handleSubmit = (event) => {
@@ -30,12 +31,17 @@ const AddRoom = () => {
         console.log(image);
     };
 
+    const handleImageChange = (image) => {
+        setUploadButtonText(image.name)
+    };
 
     return (
         <div>
             <AddRoomForm
                 handleSubmit={handleSubmit}
                 loading={loading}
+                handleImageChange={handleImageChange}
+                uploadButtonText={uploadButtonText}
             ></AddRoomForm>
         </div>
     );
