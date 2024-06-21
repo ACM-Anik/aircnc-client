@@ -4,6 +4,7 @@ import { useContext, useRef } from 'react';
 import { AuthContext } from '../../providers/AuthProvider';
 import toast from 'react-hot-toast';
 import { TbFidgetSpinner } from "react-icons/tb";
+import { saveUser } from '../../api/auth';
 
 const Login = () => {
     const {
@@ -41,6 +42,7 @@ const Login = () => {
             .then(result => {
                 console.log('result.user', result.user)
                 // Save user to DB
+                saveUser(result.user);
                 navigate(from, { replace: true });
             })
             .catch(error => {

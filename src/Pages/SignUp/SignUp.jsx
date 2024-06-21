@@ -4,6 +4,7 @@ import { useContext } from 'react';
 import { AuthContext } from '../../providers/AuthProvider';
 import toast from 'react-hot-toast';
 import { TbFidgetSpinner } from "react-icons/tb";
+import { saveUser } from '../../api/auth';
 
 const SignUp = () => {
     const {
@@ -45,6 +46,7 @@ const SignUp = () => {
                             .then(() => {
                                 toast.success("SignUp successful");
                                 // Save user to DB
+                                saveUser(result.user);
                                 navigate(from, { replace: true });
                             })
                             .catch(error => {
@@ -72,6 +74,7 @@ const SignUp = () => {
             .then(result => {
                 console.log(result.user);
                 // Save user to DB
+                saveUser(result.user);
                 navigate(from, { replace: true });
             })
             .catch(error => {
