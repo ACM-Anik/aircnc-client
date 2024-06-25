@@ -2,9 +2,11 @@
 export const saveUser = (user) => {
     const currentUser = {
         email: user.email,
-    }
+    };
 
-    fetch(`${import.meta.env.VITE_API_URL}/${user?.email}`,{
+    const url =`${import.meta.env.VITE_API_URL}/users/${user?.email}`;
+
+    fetch(url,{
         method: 'PUT',
         headers: {
             'content-type': 'application/json',
