@@ -27,16 +27,6 @@ const AddRoom = () => {
         const bedrooms = event.target.bedrooms.value;
         const description = event.target.description.value;
         const image = event.target.image.files[0];
-        console.log(location);
-        console.log(category);
-        console.log(title);
-        // console.log(from);
-        // console.log(to);
-        console.log(price);
-        console.log(total_guest);
-        console.log(bedrooms);
-        console.log(description);
-        console.log(image);
 
         // upload image 
         imageUpload(image)
@@ -57,7 +47,11 @@ const AddRoom = () => {
                         email: user?.email,
                     },
                     category,
-                }
+                };
+
+                // Post room data to server:-
+                
+                console.log(roomData);
                 setLoading(false);
             })
             .catch(err => {
@@ -74,7 +68,7 @@ const AddRoom = () => {
     // handle date range picker
     const handleDates = (ranges) => {
        setDates(ranges.selection); 
-    }
+    };
 
     return (
         <div>
