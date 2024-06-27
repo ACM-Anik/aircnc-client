@@ -3,6 +3,7 @@ import AddRoomForm from '../../components/Forms/AddRoomForm';
 import { imageUpload } from '../../api/utils';
 import { AuthContext } from '../../providers/AuthProvider';
 import { addRoom } from '../../api/rooms';
+import toast from 'react-hot-toast';
 
 const AddRoom = () => {
     const { user } = useContext(AuthContext);
@@ -30,38 +31,43 @@ const AddRoom = () => {
         const image = event.target.image.files[0];
 
         // upload image 
-        imageUpload(image)
-            .then(res => {
-                const roomData = {
-                    location,
-                    title,
-                    from,
-                    to,
-                    price: parseFloat(price),
-                    total_guest,
-                    bedrooms,
-                    description,
-                    image: res.data.display_url,
-                    host: {
-                        name: user?.displayName,
-                        image: user?.photoURL,
-                        email: user?.email,
-                    },
-                    category,
-                };
-                console.log(roomData);
+        if (image) {
+            imageUpload(image)
+                .then(res => {
+                    const roomData = {
+                        location,
+                        title,
+                        from,
+                        to,
+                        price: parseFloat(price),
+                        total_guest,
+                        bedrooms,
+                        description,
+                        image: res.data.display_url,
+                        host: {
+                            name: user?.displayName,
+                            image: user?.photoURL,
+                            email: user?.email,
+                        },
+                        category,
+                    };
+                    console.log(roomData);
 
-                // Post room data to server:-
-                addRoom(roomData)
-                .then(data => console.log(data))
-                .catch(err => console.log(err))
+                    // Post room data to server:-
+                    addRoom(roomData)
+                        .then(data => console.log(data))
+                        .catch(err => console.log(err))
 
-                setLoading(false);
-            })
-            .catch(err => {
-                console.log(err.message);
-                setLoading(false);
-            })
+                    setLoading(false);
+                })
+                .catch(err => {
+                    console.log(err.message);
+                    setLoading(false);
+                });
+        }else{
+            toast.error('Please Add the image');
+            setLoading(false);
+        };
     };
 
     // Handle the name-changing in the image upload button:-
@@ -71,7 +77,7 @@ const AddRoom = () => {
 
     // handle date range picker
     const handleDates = (ranges) => {
-       setDates(ranges.selection); 
+        setDates(ranges.selection);
     };
 
     return (
