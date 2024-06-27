@@ -1,4 +1,4 @@
-import react, { useContext, useState } from 'react';
+import { useContext, useState } from 'react';
 import AddRoomForm from '../../components/Forms/AddRoomForm';
 import { imageUpload } from '../../api/utils';
 import { AuthContext } from '../../providers/AuthProvider';
@@ -65,7 +65,7 @@ const AddRoom = () => {
                     setLoading(false);
                 });
         }else{
-            toast.error('Please Add the image');
+            toast.error('Please add a image the rooms');
             setLoading(false);
         };
     };
