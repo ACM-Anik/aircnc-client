@@ -32,6 +32,7 @@ const Rooms = () => {
     if (loading) {
         return <Loader></Loader>
     }
+    
     return (
         <Container>
             {rooms && rooms.length > 0 ?
