@@ -16,6 +16,7 @@ const Rooms = () => {
 
     useEffect(() => {
         setLoading(true);
+        // Fetching data:-
         getAllRooms()
             .then(data => {
                 if (category) {
@@ -32,7 +33,7 @@ const Rooms = () => {
     if (loading) {
         return <Loader></Loader>
     }
-    
+
     return (
         <Container>
             {rooms && rooms.length > 0 ?

@@ -27,6 +27,7 @@ const AddRoom = () => {
         const price = event.target.price.value;
         const total_guest = event.target.total_guest.value;
         const bedrooms = event.target.bedrooms.value;
+        const bathrooms = event.target.bathrooms.value;
         const description = event.target.description.value;
         const image = event.target.image.files[0];
 
@@ -42,6 +43,7 @@ const AddRoom = () => {
                         price: parseFloat(price),
                         total_guest,
                         bedrooms,
+                        bathrooms,
                         description,
                         image: res.data.display_url,
                         host: {
@@ -65,7 +67,7 @@ const AddRoom = () => {
                     setLoading(false);
                 });
         }else{
-            toast.error('Please add a image the rooms');
+            toast.error('Please add an image the rooms');
             setLoading(false);
         };
     };
