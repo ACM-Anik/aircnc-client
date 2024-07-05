@@ -25,7 +25,7 @@ export const becomeHost = (email) => {
 
     const url =`${import.meta.env.VITE_API_URL}/users/${email}`;
 
-    fetch(url,{
+    return fetch(url,{
         method: 'PUT',
         headers: {
             'content-type': 'application/json',
@@ -33,5 +33,4 @@ export const becomeHost = (email) => {
         body: JSON.stringify(currentUser),
     })
     .then(res => res.json())
-    .then(data => console.log(data))
 };

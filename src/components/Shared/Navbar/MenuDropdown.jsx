@@ -4,6 +4,8 @@ import { useCallback, useContext, useState } from 'react'
 import { AuthContext } from '../../../providers/AuthProvider'
 import { Link } from 'react-router-dom'
 import HostRequestModal from '../../Modal/HostRequestModal'
+import { becomeHost } from '../../../api/auth'
+import toast from 'react-hot-toast'
 
 const MenuDropdown = () => {
   const { user, logOut } = useContext(AuthContext);
@@ -11,12 +13,17 @@ const MenuDropdown = () => {
   const [modal, setModal] = useState(false);
 
   const modalHandler = (email) => {
-    console.log('modlal click');
-  }
+    becomeHost(email)
+    .then(data => {
+      console.log(data);
+      toast.success('You are host now, Post Rooms!');
+      closeModal();
+    })
+  };
 
   const closeModal = (email) => {
     setModal(false);
-  }
+  };
 
   return (
     <div className='relative'>
