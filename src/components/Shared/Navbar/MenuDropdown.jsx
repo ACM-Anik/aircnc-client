@@ -15,11 +15,11 @@ const MenuDropdown = () => {
 
   const modalHandler = (email) => {
     becomeHost(email)
-    .then(data => {
-      console.log(data);
-      toast.success('You are host now, Post Rooms!');
-      closeModal();
-    })
+      .then(data => {
+        console.log(data);
+        toast.success('You are host now, Post Rooms!');
+        closeModal();
+      })
   };
 
   const closeModal = (email) => {
@@ -30,9 +30,19 @@ const MenuDropdown = () => {
     <div className='relative'>
       <div className='flex flex-row items-center gap-3'>
         {/* AirCNC btn */}
-        <div onClick={() => setModal(true)} className='hidden md:block text-sm font-semibold py-3 px-4 rounded-full hover:bg-neutral-100 transition cursor-pointer'>
-          AirCNC your home
-        </div>
+        {
+          user ?
+            <div className='hidden md:block text-sm font-semibold py-3 px-4 rounded-full hover:bg-neutral-100 transition cursor-pointer'>
+              <button
+                onClick={() => setModal(true)}
+                disabled={!user}>
+                AirCNC your home
+              </button>
+            </div>
+            :
+            ""
+        }
+
         {/* Dropdown Menu*/}
         <div
           onClick={() => setIsOpen(!isOpen)}
