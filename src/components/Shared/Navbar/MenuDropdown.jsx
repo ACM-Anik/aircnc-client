@@ -11,6 +11,7 @@ const MenuDropdown = () => {
   const { user, logOut, role } = useContext(AuthContext);
   const [isOpen, setIsOpen] = useState(false);
   const [modal, setModal] = useState(false);
+  // const role = false;
   console.log(role);
 
   const modalHandler = (email) => {
@@ -32,10 +33,11 @@ const MenuDropdown = () => {
         {/* AirCNC btn */}
         {
           user ?
-            <div className='hidden md:block text-sm font-semibold py-3 px-4 rounded-full hover:bg-neutral-100 transition cursor-pointer'>
+            <div className={`hidden md:block text-sm font-semibold py-3 px-4 rounded-full ${role ? 'hidden' : 'cursor-pointer hover:bg-neutral-100 transition '}`}>
               <button
+                disabled={role}
                 onClick={() => setModal(true)}
-                disabled={!user}>
+              >
                 AirCNC your home
               </button>
             </div>
