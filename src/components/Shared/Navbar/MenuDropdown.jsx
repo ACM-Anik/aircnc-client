@@ -8,7 +8,7 @@ import { becomeHost } from '../../../api/auth'
 import toast from 'react-hot-toast'
 
 const MenuDropdown = () => {
-  const { user, logOut, role } = useContext(AuthContext);
+  const { user, logOut, role, setRole } = useContext(AuthContext);
   const [isOpen, setIsOpen] = useState(false);
   const [modal, setModal] = useState(false);
   // const role = false;
@@ -19,6 +19,7 @@ const MenuDropdown = () => {
       .then(data => {
         console.log(data);
         toast.success('You are host now, Post Rooms!');
+        setRole('host');
         closeModal();
       })
   };
@@ -31,19 +32,17 @@ const MenuDropdown = () => {
     <div className='relative'>
       <div className='flex flex-row items-center gap-3'>
         {/* AirCNC btn */}
-        {
-          user ?
-            <div className={`hidden md:block text-sm font-semibold py-3 px-4 rounded-full ${role ? 'hidden' : 'cursor-pointer hover:bg-neutral-100 transition '}`}>
-              <button
-                disabled={role}
-                onClick={() => setModal(true)}
-              >
-                AirCNC your home
-              </button>
-            </div>
-            :
-            ""
-        }
+        <div className={`hidden md:block text-sm font-semibold py-3 px-6 rounded-full ${role ? '' : 'cursor-pointer hover:bg-neutral-100 transition'}`}>
+          {
+            !role &&
+            <button
+              disabled={!user}
+              onClick={() => setModal(true)}
+            >
+              AirCNC your home
+            </button>
+          }
+        </div>
 
         {/* Dropdown Menu*/}
         <div
@@ -74,7 +73,10 @@ const MenuDropdown = () => {
                   Dashboard
                 </Link>
                 <div
-                  onClick={logOut}
+                  onClick={() => {
+                    logOut();
+                    setIsOpen(false);
+                  }}
                   className='px-4 py-3 hover:bg-neutral-100 transition font-semibold cursor-pointer'
                 >
                   Logout

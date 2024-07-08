@@ -24,9 +24,9 @@ const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if(user){
+    if (user) {
       getRole(user.email)
-      .then(data => setRole(data))
+        .then(data => setRole(data))
     }
   }, [user]);
 
@@ -52,6 +52,7 @@ const AuthProvider = ({ children }) => {
 
   const logOut = () => {
     setLoading(true);
+    setRole(null);
     return signOut(auth);
   }
 
