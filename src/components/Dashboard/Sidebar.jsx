@@ -9,25 +9,26 @@ import { BsFillHouseAddFill } from 'react-icons/bs';
 
 
 const Sidebar = () => {
-    const navigate = useNavigate()
-    const [toggle, setToggle] = useState(false)
-    const { user, logOut } = useContext(AuthContext)
+    const navigate = useNavigate();
+    const [toggle, setToggle] = useState(false);
+    const { user, logOut, role, setRole } = useContext(AuthContext);
 
-    const [isActive, setActive] = useState('false')
+    const [isActive, setActive] = useState('false');
     const toggleHandler = event => {
-        setToggle(event.target.checked)
+        setToggle(event.target.checked);
     }
     // Sidebar Responsive Handler
     const handleToggle = () => {
-        setActive(!isActive)
+        setActive(!isActive);
     }
     const handleLogOut = () => {
-        logOut()
-        navigate('/')
+        logOut();
+        setRole(null);
+        navigate('/');
     }
     return (
         <>
-            {/* Small Screen Navbar */}
+            {/* Small Screen - Navbar */}
             <div className='bg-gray-100 text-gray-800 flex justify-between md:hidden'>
                 <div>
                     <div className='block cursor-pointer p-4 font-bold'>

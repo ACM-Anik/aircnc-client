@@ -32,7 +32,7 @@ const MenuDropdown = () => {
     <div className='relative'>
       <div className='flex flex-row items-center gap-3'>
         {/* AirCNC btn */}
-        <div className={`hidden md:block text-sm font-semibold py-3 px-6 rounded-full ${role ? '' : 'cursor-pointer hover:bg-neutral-100 transition'}`}>
+        <div className={`hidden md:block text-sm font-semibold py-3 px-6 rounded-full ${role || !user ? '' : 'cursor-pointer hover:bg-neutral-100 transition'}`}>
           {
             !role &&
             <button
@@ -75,6 +75,7 @@ const MenuDropdown = () => {
                 <div
                   onClick={() => {
                     logOut();
+                    setRole(null);
                     setIsOpen(false);
                   }}
                   className='px-4 py-3 hover:bg-neutral-100 transition font-semibold cursor-pointer'
