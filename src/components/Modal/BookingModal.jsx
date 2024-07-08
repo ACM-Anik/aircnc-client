@@ -3,6 +3,7 @@ import { format } from 'date-fns'
 import { Fragment } from 'react'
 
 const BookingModal = ({ modalHandler, closeModal, isOpen, bookingInfo }) => {
+    
     return (
         <Transition appear show={isOpen} as={Fragment}>
             <Dialog as='div' className='relative z-10' onClose={closeModal}>
