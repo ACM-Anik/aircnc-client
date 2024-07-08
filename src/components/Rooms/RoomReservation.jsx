@@ -6,11 +6,21 @@ import BookingModal from '../Modal/BookingModal';
 import { formatDistance, subDays } from "date-fns";
 
 const RoomReservation = ({ roomData }) => {
+    const { isOpen, setIsOpen } = useState(false);
     const { user, role } = useContext(AuthContext);
     console.log(roomData);
-    const totalPrice = parseFloat(formatDistance(new Date(roomData.to), new Date(roomData.from)).split(' ')[0]);
-    console.log(totalPrice);
-    const { isOpen, setIsOpen } = useState(false);
+
+    // Price Calculation:-
+    const totalPrice = parseFloat(formatDistance(new Date(roomData.to), new Date(roomData.from)).split(' ')[0]) * roomData.price;
+    
+    // Start-End date picking:-
+    const [value, setValue] = useState({
+        startDate: new Date(roomData?.from),
+        endDate: new Date(roomData?.to),
+        key: 'selection',
+    });
+
+    // Booking State (Info collecting):-
     const { BookingInfo, setBookingInfo } = useState({
         guest: {
             name: user.displayName,
@@ -19,8 +29,12 @@ const RoomReservation = ({ roomData }) => {
         },
         host: roomData.host.email,
         location: roomData.location,
-        price: roomData.price,
+        price: totalPrice,
+        to: value.endDate,
+        from: value.startDate,
     });
+    console.log(BookingInfo);
+
 
     return (
         <div className="bg-white rounded-xl border-[1px] border-neutral-200 overflow-hidden">
@@ -43,7 +57,7 @@ const RoomReservation = ({ roomData }) => {
             </div>
             <div className="p-4 flex flex-row items-center justify-between font-semibold text-lg">
                 <div>Total</div>
-                <div>$ 300</div>
+                <div>$ {totalPrice}</div>
             </div>
 
             {/* <BookingModal
