@@ -21,26 +21,25 @@ const RoomReservation = ({ roomData }) => {
     });
 
     // Booking State (Info collecting):-
-    const { bookingInfo, setBookingInfo } = useState({
-        guest: {
-            name: user.displayName,
-            email: user.email,
-            image: user.photoURL
-        },
-        host: roomData.host.email,
-        location: roomData.location,
-        price: totalPrice,
-        from: value.startDate,
-        to: value.endDate,
-        title: roomData.title,
-        roomId: roomData._id,
-        image: roomData.image,
-    });
-    console.log(bookingInfo);
+  // Booking state
+  const [bookingInfo, setBookingInfo] = useState({
+    guest: { name: user.displayName, email: user.email, image: user.photoURL },
+    host: roomData.host.email,
+    location: roomData.location,
+    price: totalPrice,
+    from: value.startDate,
+    to: value.endDate,
+    title: roomData.title,
+    roomId: roomData._id,
+    image: roomData.image,
+  })
+  const handleSelect = ranges => {
+    setValue({ ...value })
+  }
 
-    const handleSelect = (range) => {
-        setValue(...value);
-    }
+  const modalHandler = () => {
+    console.log('modalhandler');
+  }
 
 
     return (
