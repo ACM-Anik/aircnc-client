@@ -10,9 +10,9 @@ const RoomReservation = ({ roomData }) => {
     const { user, role } = useContext(AuthContext);
     console.log(roomData);
 
-    // Price Calculation:-
+    // Price Calculation (with date-fns):-
     const totalPrice = parseFloat(formatDistance(new Date(roomData.to), new Date(roomData.from)).split(' ')[0]) * roomData.price;
-    
+
     // Start-End date picking:-
     const [value, setValue] = useState({
         startDate: new Date(roomData?.from),
@@ -21,7 +21,7 @@ const RoomReservation = ({ roomData }) => {
     });
 
     // Booking State (Info collecting):-
-    const { BookingInfo, setBookingInfo } = useState({
+    const { bookingInfo, setBookingInfo } = useState({
         guest: {
             name: user.displayName,
             email: user.email,
@@ -30,13 +30,16 @@ const RoomReservation = ({ roomData }) => {
         host: roomData.host.email,
         location: roomData.location,
         price: totalPrice,
-        to: value.endDate,
         from: value.startDate,
+        to: value.endDate,
+        title: roomData.title,
+        roomId: roomData._id,
+        image: roomData.image,
     });
-    console.log(BookingInfo);
+    console.log(bookingInfo);
 
     const handleSelect = (range) => {
-        setValue(...range);
+        setValue(...value);
     }
 
 
@@ -48,7 +51,10 @@ const RoomReservation = ({ roomData }) => {
             </div>
             <hr />
             <div className="flex justify-center">
-                <Calender value={value} handleSelect={handleSelect}></Calender>
+                <Calender
+                    value={value}
+                    handleSelect={handleSelect}
+                ></Calender>
             </div>
             <hr />
             {/* Reserve Button */}
@@ -64,9 +70,10 @@ const RoomReservation = ({ roomData }) => {
                 <div>$ {totalPrice}</div>
             </div>
 
-            {/* <BookingModal
+            <BookingModal
+                bookingInfo={bookingInfo}
                 isOpen={isOpen}
-            ></BookingModal> */}
+            ></BookingModal>
         </div>
     );
 };

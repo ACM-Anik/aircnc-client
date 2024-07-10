@@ -4,21 +4,21 @@ export const saveUser = (user) => {
         email: user.email,
     };
 
-    const url =`${import.meta.env.VITE_API_URL}/users/${user?.email}`;
+    const url = `${import.meta.env.VITE_API_URL}/users/${user?.email}`;
 
-    fetch(url,{
+    fetch(url, {
         method: 'PUT',
         headers: {
             'content-type': 'application/json',
         },
         body: JSON.stringify(currentUser),
     })
-    .then(res => res.json())
-    .then(data => console.log(data))
+        .then(res => res.json())
+        .then(data => console.log(data))
 };
 
 // Become a host:-
-export const becomeHost = (email) => {
+export const becomeHost = async (email) => {
     const currentUser = {
         role: 'host',
     };
@@ -36,10 +36,16 @@ export const becomeHost = (email) => {
 };
 
 // Get role (user):-
-export const getRole = async (email) => {
-    const url =`${import.meta.env.VITE_API_URL}/users/${email}`;
+// export const getRole = async (email) => {
+//     const url = `${import.meta.env.VITE_API_URL}/users/${email}`;
 
-    const response = await fetch(url);
-    const user = await response.json();
-    return user?.role;
-};
+//     const response = await fetch(url);
+//     const user = await response.json();
+//     return user?.role;
+// };
+// Get role
+export const getRole = async email => {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/users/${email}`)
+    const user = await response.json()
+    return user?.role
+  }

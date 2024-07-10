@@ -15,13 +15,12 @@ const MenuDropdown = () => {
   console.log(role);
 
   const modalHandler = (email) => {
-    becomeHost(email)
-      .then(data => {
-        console.log(data);
-        toast.success('You are host now, Post Rooms!');
-        setRole('host');
-        closeModal();
-      })
+    becomeHost(email).then(data => {
+      console.log(data);
+      toast.success('You are host now, Post Rooms!');
+      setRole('host');
+      closeModal();
+    })
   };
 
   const closeModal = (email) => {
