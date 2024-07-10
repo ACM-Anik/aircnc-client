@@ -35,6 +35,10 @@ const RoomReservation = ({ roomData }) => {
     });
     console.log(BookingInfo);
 
+    const handleSelect = (range) => {
+        setValue(...range);
+    }
+
 
     return (
         <div className="bg-white rounded-xl border-[1px] border-neutral-200 overflow-hidden">
@@ -44,7 +48,7 @@ const RoomReservation = ({ roomData }) => {
             </div>
             <hr />
             <div className="flex justify-center">
-                <Calender></Calender>
+                <Calender value={value} handleSelect={handleSelect}></Calender>
             </div>
             <hr />
             {/* Reserve Button */}
