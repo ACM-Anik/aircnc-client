@@ -47,12 +47,12 @@ const RoomReservation = ({ roomData }) => {
         addBooking(bookingInfo)
             .then(data => {
                 console.log(data);
-                setIsOpen(false);
-                toast.success("The room is successfully booked for you!");
+                toast.success("Booking successful!");
+                closeModal();
             })
             .catch(error => {
                 console.log(error)
-                toast.error("The room is successfully booked for you!");
+                toast.error("Sorry, a problem arrived!");
             });
     };
 
