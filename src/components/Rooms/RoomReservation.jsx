@@ -6,9 +6,12 @@ import BookingModal from '../Modal/BookingModal';
 import { formatDistance, subDays } from "date-fns";
 
 const RoomReservation = ({ roomData }) => {
-    const { isOpen, setIsOpen } = useState(false);
+    const [ isOpen, setIsOpen ] = useState(false);
+    const closeModal = () => {
+        setIsOpen(false);
+    };
     const { user, role } = useContext(AuthContext);
-    console.log(roomData);
+    console.log("RoomData:-", roomData);
 
     // Price Calculation (with date-fns):-
     const totalPrice = parseFloat(formatDistance(new Date(roomData.to), new Date(roomData.from)).split(' ')[0]) * roomData.price;
@@ -21,25 +24,27 @@ const RoomReservation = ({ roomData }) => {
     });
 
     // Booking State (Info collecting):-
-  // Booking state
-  const [bookingInfo, setBookingInfo] = useState({
-    guest: { name: user.displayName, email: user.email, image: user.photoURL },
-    host: roomData.host.email,
-    location: roomData.location,
-    price: totalPrice,
-    from: value.startDate,
-    to: value.endDate,
-    title: roomData.title,
-    roomId: roomData._id,
-    image: roomData.image,
-  })
-  const handleSelect = ranges => {
-    setValue({ ...value })
-  }
+    // Booking state
+    const [bookingInfo, setBookingInfo] = useState({
+        guest: { name: user.displayName, email: user.email, image: user.photoURL },
+        host: roomData.host.email,
+        location: roomData.location,
+        price: totalPrice,
+        from: value.startDate,
+        to: value.endDate,
+        title: roomData.title,
+        roomId: roomData._id,
+        image: roomData.image,
+    });
+    console.log(bookingInfo);
 
-  const modalHandler = () => {
-    console.log('modalhandler');
-  }
+    const handleSelect = ranges => {
+        setValue({ ...value })
+    };
+
+    const modalHandler = () => {
+        console.log('modalhandler');
+    };
 
 
     return (
@@ -71,7 +76,9 @@ const RoomReservation = ({ roomData }) => {
 
             <BookingModal
                 bookingInfo={bookingInfo}
+                modalHandler={modalHandler}
                 isOpen={isOpen}
+                closeModal={closeModal}
             ></BookingModal>
         </div>
     );

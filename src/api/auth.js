@@ -18,7 +18,7 @@ export const saveUser = (user) => {
 };
 
 // Become a host:-
-export const becomeHost = async (email) => {
+export const becomeHost = (email) => {
     const currentUser = {
         role: 'host',
     };
@@ -36,16 +36,12 @@ export const becomeHost = async (email) => {
 };
 
 // Get role (user):-
-// export const getRole = async (email) => {
-//     const url = `${import.meta.env.VITE_API_URL}/users/${email}`;
+export const getRole = async (email) => {
+    const url = `${import.meta.env.VITE_API_URL}/users/${email}`;
 
-//     const response = await fetch(url);
-//     const user = await response.json();
-//     return user?.role;
-// };
-// Get role
-export const getRole = async email => {
-    const response = await fetch(`${import.meta.env.VITE_API_URL}/users/${email}`)
-    const user = await response.json()
-    return user?.role
-  }
+    const response = await fetch(url);
+    const user = await response.json();
+    console.log(user?.role);
+    return user?.role;
+};
+ 

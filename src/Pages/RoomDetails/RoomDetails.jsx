@@ -5,7 +5,7 @@ import RoomInfo from '../../components/Rooms/RoomInfo';
 import RoomReservation from '../../components/Rooms/RoomReservation';
 import { useLoaderData } from 'react-router-dom';
 
-const RoomDetails = () => {
+const RoomDetails = () => { //Page
     const roomData = useLoaderData();
 
     return (
