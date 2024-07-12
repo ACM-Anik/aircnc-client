@@ -4,14 +4,15 @@ import Button from '../Button/Button';
 import { AuthContext } from '../../providers/AuthProvider';
 import BookingModal from '../Modal/BookingModal';
 import { formatDistance, subDays } from "date-fns";
+import { addBooking } from '../../api/bookings';
+import toast from 'react-hot-toast';
 
 const RoomReservation = ({ roomData }) => {
-    const [ isOpen, setIsOpen ] = useState(false);
+    const { user, role } = useContext(AuthContext);
+    const [isOpen, setIsOpen] = useState(false);
     const closeModal = () => {
         setIsOpen(false);
     };
-    const { user, role } = useContext(AuthContext);
-    console.log("RoomData:-", roomData);
 
     // Price Calculation (with date-fns):-
     const totalPrice = parseFloat(formatDistance(new Date(roomData.to), new Date(roomData.from)).split(' ')[0]) * roomData.price;
@@ -24,7 +25,6 @@ const RoomReservation = ({ roomData }) => {
     });
 
     // Booking State (Info collecting):-
-    // Booking state
     const [bookingInfo, setBookingInfo] = useState({
         guest: { name: user.displayName, email: user.email, image: user.photoURL },
         host: roomData.host.email,
@@ -40,9 +40,20 @@ const RoomReservation = ({ roomData }) => {
     const handleSelect = ranges => {
         setValue({ ...value })
     };
-    
+
+    // Saving a booking of the room in the DB:--
     const modalHandler = () => {
         console.log(bookingInfo);
+        addBooking(bookingInfo)
+            .then(data => {
+                console.log(data);
+                setIsOpen(false);
+                toast.success("The room is successfully booked for you!");
+            })
+            .catch(error => {
+                console.log(error)
+                toast.error("The room is successfully booked for you!");
+            });
     };
 
 
