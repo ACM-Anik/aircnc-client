@@ -39,28 +39,28 @@ const BookingModal = ({ modalHandler, closeModal, isOpen, bookingInfo }) => {
                 </Dialog.Title>
                 <div className='mt-2'>
                   <p className='text-sm text-gray-500'>
-                    Room: {bookingInfo.title}
+                    Room: {bookingInfo?.title}
                   </p>
                 </div>
                 <div className='mt-2'>
                   <p className='text-sm text-gray-500'>
-                    Location: {bookingInfo.location}
+                    Location: {bookingInfo?.location}
                   </p>
                 </div>
                 <div className='mt-2'>
                   <p className='text-sm text-gray-500'>
-                    Guest: {bookingInfo.guest.name}
+                    Guest: {bookingInfo?.guest.name}
                   </p>
                 </div>
                 <div className='mt-2'>
                   <p className='text-sm text-gray-500'>
-                    From: {format(new Date(bookingInfo.from), 'PP')} - To:{' '}
-                    {format(new Date(bookingInfo.to), 'PP')}
+                    From: {format(new Date(bookingInfo?.from), 'PP')} - To:{' '}
+                    {format(new Date(bookingInfo?.to), 'PP')}
                   </p>
                 </div>
                 <div className='mt-2'>
                   <p className='text-sm text-gray-500'>
-                    Price: $ {bookingInfo.price}
+                    Price: $ {bookingInfo?.price}
                   </p>
                 </div>
                 <hr className='mt-8 ' />
@@ -77,7 +77,7 @@ const BookingModal = ({ modalHandler, closeModal, isOpen, bookingInfo }) => {
                     className='inline-flex justify-center rounded-md border border-transparent bg-green-100 px-4 py-2 text-sm font-medium text-green-900 hover:bg-green-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2'
                     onClick={modalHandler}
                   >
-                    Pay {bookingInfo.price}$
+                    Pay {bookingInfo?.price}$
                   </button>
                 </div>
               </Dialog.Panel>

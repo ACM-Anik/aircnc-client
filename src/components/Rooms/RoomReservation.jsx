@@ -36,14 +36,13 @@ const RoomReservation = ({ roomData }) => {
         roomId: roomData._id,
         image: roomData.image,
     });
-    console.log(bookingInfo);
 
     const handleSelect = ranges => {
         setValue({ ...value })
     };
-
+    
     const modalHandler = () => {
-        console.log('modalhandler');
+        console.log(bookingInfo);
     };
 
 
