@@ -53,7 +53,7 @@ const RoomReservation = ({ roomData }) => {
                     .then(data => {
                         console.log(data);
                         toast.success("Booking successful!");
-                        navigate('/dashboard');
+                        navigate('/dashboard/my-bookings');
                         closeModal();
                     })
                     .catch(error => console.log(error));
