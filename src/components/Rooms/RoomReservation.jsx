@@ -6,9 +6,11 @@ import BookingModal from '../Modal/BookingModal';
 import { formatDistance, subDays } from "date-fns";
 import { addBooking, updateStatus } from '../../api/bookings';
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 const RoomReservation = ({ roomData }) => {
     const { user, role } = useContext(AuthContext);
+    const navigate = useNavigate();
     const [isOpen, setIsOpen] = useState(false);
     const closeModal = () => {
         setIsOpen(false);
@@ -51,6 +53,7 @@ const RoomReservation = ({ roomData }) => {
                     .then(data => {
                         console.log(data);
                         toast.success("Booking successful!");
+                        navigate('/dashboard');
                         closeModal();
                     })
                     .catch(error => console.log(error));
@@ -80,7 +83,7 @@ const RoomReservation = ({ roomData }) => {
             <div className="p-4">
                 <Button
                     onClick={() => setIsOpen(true)}
-                    disabled={roomData?.host.email === user?.email}
+                    disabled={roomData?.host.email === user?.email || roomData.booked}
                     label="Reserve"
                 ></Button>
             </div>
