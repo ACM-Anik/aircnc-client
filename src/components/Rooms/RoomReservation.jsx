@@ -4,7 +4,7 @@ import Button from '../Button/Button';
 import { AuthContext } from '../../providers/AuthProvider';
 import BookingModal from '../Modal/BookingModal';
 import { formatDistance, subDays } from "date-fns";
-import { addBooking } from '../../api/bookings';
+import { addBooking, updateStatus } from '../../api/bookings';
 import toast from 'react-hot-toast';
 
 const RoomReservation = ({ roomData }) => {
@@ -47,8 +47,13 @@ const RoomReservation = ({ roomData }) => {
         addBooking(bookingInfo)
             .then(data => {
                 console.log(data);
-                toast.success("Booking successful!");
-                closeModal();
+                updateStatus(roomData._id, true)
+                    .then(data => {
+                        console.log(data);
+                        toast.success("Booking successful!");
+                        closeModal();
+                    })
+                    .catch(error => console.log(error));
             })
             .catch(error => {
                 console.log(error)
