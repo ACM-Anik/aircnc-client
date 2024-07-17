@@ -25,8 +25,8 @@ export const router = createBrowserRouter([
           <PrivateRoute>
             <RoomDetails></RoomDetails>
           </PrivateRoute>
-        ), 
-        loader: ({params}) => getRoom(params.id),
+        ),
+        loader: ({ params }) => getRoom(params.id),
       },
     ]
   },
@@ -40,8 +40,10 @@ export const router = createBrowserRouter([
   },
 
   {
-    path:'/dashboard', 
-    element: <DashboardLayout></DashboardLayout>,
+    path: '/dashboard',
+    element: <PrivateRoute>
+      <DashboardLayout></DashboardLayout>
+    </PrivateRoute>,
     children: [
       {
         path: '/dashboard/add-room',
