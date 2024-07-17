@@ -13,7 +13,6 @@ export const addBooking = async (bookingData) => {
     return data;
 };
 
-
 // Update room status:-
 export const updateStatus = async (id, status) => {
     const url = `${import.meta.env.VITE_API_URL}/rooms/status/${id}`;
@@ -26,4 +25,17 @@ export const updateStatus = async (id, status) => {
     });
     const data = await response.json();
     return data;
+};
+
+// Get all the Bookings for a user by email:-
+export const getBookings = async (email) => {
+    const url = `${import.meta.env.VITE_API_URL}/bookings?email=${email}`;
+    const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+            'content-type': 'application/json',
+        },
+    });
+    const bookings = await response.json();
+    return bookings;
 };
