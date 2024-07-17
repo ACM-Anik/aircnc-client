@@ -37,8 +37,8 @@ const RoomReservation = ({ roomData }) => {
         image: roomData.image,
     });
 
-    const handleSelect = ranges => {
-        setValue({ ...value })
+    const handleSelect = (ranges) => {
+        setValue({ ...value });
     };
 
     // Saving a booking of the room in the DB:--
