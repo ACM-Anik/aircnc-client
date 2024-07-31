@@ -30,12 +30,7 @@ export const updateStatus = async (id, status) => {
 // Get all the Bookings for a user by email:-
 export const getBookings = async (email) => {
     const url = `${import.meta.env.VITE_API_URL}/bookings?email=${email}`;
-    const response = await fetch(url, {
-        method: 'GET',
-        headers: {
-            'content-type': 'application/json',
-        },
-    });
+    const response = await fetch(url);
     const bookings = await response.json();
     return bookings;
 };
