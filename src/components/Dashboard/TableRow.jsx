@@ -1,6 +1,7 @@
 import { format } from 'date-fns'
 import { useState } from 'react';
 import DeleteModal from '../Modal/DeleteModal';
+import { deleteBooking, updateStatus } from '../../api/bookings';
 
 const TableRow = ({ booking }) => {
     const [isOpen, setIsOpen] = useState(false);
@@ -12,7 +13,11 @@ const TableRow = ({ booking }) => {
         setIsOpen(false);
     };
     const modalHandler = () => {
-        console.log('delete')
+        deleteBooking(id)
+        .then(data => {
+            console.log(data);
+        })
+        .catch(error => console.log(error))
     };
 
     return (
