@@ -7,6 +7,7 @@ import { FcSettings } from 'react-icons/fc';
 import { AiOutlineBars } from 'react-icons/ai';
 import { BsFillHouseAddFill } from 'react-icons/bs';
 import GuestMenu from './GuestMenu';
+import HostMenu from './HostMenu';
 
 
 const Sidebar = () => {
@@ -17,6 +18,7 @@ const Sidebar = () => {
     const [isActive, setActive] = useState('false');
     const toggleHandler = event => {
         setToggle(event.target.checked);
+        console.log("toggled", toggle);
     }
     // Sidebar Responsive Handler
     const handleToggle = () => {
@@ -97,9 +99,20 @@ const Sidebar = () => {
                                     <span className='px-4 py-1 rounded-r-md bg-gray-300 peer-checked:bg-rose-400'>
                                         Host
                                     </span>
+                                    {/* <span className={`${isActive && 'bg-rose-400 peer-checked:bg-gray-300 '} px-4 py-1 rounded-l-md `}>
+                                        Guest
+                                    </span>
+                                    <span className={`${isActive && 'bg-gray-300 peer-checked:bg-rose-400'} px-4 py-1 rounded-r-md `}>
+                                        Host
+                                    </span> */}
                                 </label>
                                 {/* Menu Links */}
-                               <GuestMenu></GuestMenu>
+                                {
+                                    role || toggle ?
+                                        <HostMenu></HostMenu>
+                                        :
+                                        <GuestMenu></GuestMenu>
+                                }
                             </>
                         </nav>
                     </div>

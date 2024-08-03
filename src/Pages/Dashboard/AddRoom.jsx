@@ -57,7 +57,10 @@ const AddRoom = () => {
 
                     // Post room data to server:-
                     addRoom(roomData)
-                        .then(data => console.log(data))
+                        .then(data => {
+                            console.log(data);
+                            toast.success('Successfully added the room!');
+                        })
                         .catch(err => console.log(err))
 
                     setLoading(false);
