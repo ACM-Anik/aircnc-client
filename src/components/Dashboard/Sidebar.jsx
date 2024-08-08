@@ -18,7 +18,6 @@ const Sidebar = () => {
     const [isActive, setActive] = useState('false');
     const toggleHandler = event => {
         setToggle(event.target.checked);
-        console.log("toggled", toggle);
     }
     // Sidebar Responsive Handler
     const handleToggle = () => {
