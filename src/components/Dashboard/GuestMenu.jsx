@@ -1,7 +1,9 @@
-import { NavLink } from 'react-router-dom'
-import { BsFingerprint } from 'react-icons/bs'
-import { GrUserAdmin } from 'react-icons/gr'
+import { NavLink } from 'react-router-dom';
+import { BsFingerprint } from 'react-icons/bs';
+import { GrUserAdmin } from 'react-icons/gr';
+
 const GuestMenu = () => {
+
     return (
         <>
             <NavLink
