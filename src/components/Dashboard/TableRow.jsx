@@ -4,7 +4,7 @@ import DeleteModal from '../Modal/DeleteModal';
 import { deleteBooking, updateStatus } from '../../api/bookings';
 import toast from 'react-hot-toast';
 
-const TableRow = ({ booking }) => {
+const TableRow = ({ booking, fetchingBookings }) => {
     const [isOpen, setIsOpen] = useState(false);
 
     const closeModal = () => {
@@ -20,6 +20,7 @@ const TableRow = ({ booking }) => {
                     .then(data => {
                         console.log(data);
                         toast.success('Booking Canceled');
+                        fetchingBookings();
                     }).catch(error => console.log(error));
             }).catch(error => console.log(error));
         closeModal();

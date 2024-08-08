@@ -12,7 +12,7 @@ const MyBookings = () => {
             .then(data => {
                 setBookings(data);
             })
-            .catch(err => console.log(err))
+            .catch(err => console.log(err));
     };
     useEffect(() => { fetchingBookings() }, [user]);
 
