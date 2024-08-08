@@ -2,22 +2,27 @@ import { format } from 'date-fns'
 import { useState } from 'react';
 import DeleteModal from '../Modal/DeleteModal';
 import { deleteBooking, updateStatus } from '../../api/bookings';
+import toast from 'react-hot-toast';
 
 const TableRow = ({ booking }) => {
     const [isOpen, setIsOpen] = useState(false);
 
-    const openModal = () => {
-        setIsOpen(true);
-    };
     const closeModal = () => {
         setIsOpen(false);
     };
-    const modalHandler = () => {
+
+    // Canceling a booking:--
+    const modalHandler = (id) => {
         deleteBooking(id)
-        .then(data => {
-            console.log(data);
-        })
-        .catch(error => console.log(error))
+            .then(data => {
+                console.log(data);
+                updateStatus(booking.roomId, false)
+                    .then(data => {
+                        console.log(data);
+                        toast.success('Booking Canceled');
+                    }).catch(error => console.log(error));
+            }).catch(error => console.log(error));
+        closeModal();
     };
 
     return (
@@ -56,8 +61,9 @@ const TableRow = ({ booking }) => {
             </td>
             <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
                 <span
-                    onClick={() => openModal}
-                    className='relative cursor-pointer inline-block px-3 py-1 font-semibold text-green-900 leading-tight'>
+                    onClick={() => setIsOpen(true)}
+                    className='relative cursor-pointer inline-block px-3 py-1 font-semibold text-green-900 leading-tight'
+                >
                     <span
                         aria-hidden='true'
                         className='absolute inset-0 bg-red-200 opacity-50 rounded-full'
@@ -66,7 +72,7 @@ const TableRow = ({ booking }) => {
                 </span>
                 <DeleteModal
                     isOpen={isOpen}
-                    setIsOpen={setIsOpen}
+                    closeModal={closeModal}
                     modalHandler={modalHandler}
                     id={booking._id}
                 ></DeleteModal>
