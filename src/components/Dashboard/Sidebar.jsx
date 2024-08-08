@@ -28,6 +28,7 @@ const Sidebar = () => {
         setRole(null);
         navigate('/');
     }
+    
     return (
         <>
             {/* Small Screen - Navbar */}
