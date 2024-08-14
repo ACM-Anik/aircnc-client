@@ -1,4 +1,20 @@
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../../providers/AuthProvider";
+import { getRooms } from "../../api/rooms";
+
 const MyListings = () => {
+    const {user} = useContext(AuthContext);
+    const [rooms, setRooms] = useState([]);
+    
+    const fetchRooms = () => {
+        getRooms(user?.email).then(data => setRooms(data))
+    };
+    
+    useEffect(() => {
+        fetchRooms()
+    }, [user]);
+    
+    console.log(rooms);
     
     return (
       <div className='container mx-auto px-4 sm:px-8'>
