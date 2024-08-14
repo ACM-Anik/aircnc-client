@@ -16,15 +16,20 @@ export const addRoom = async (roomData) => {
 // Getting all the rooms:-
 export const getAllRooms = async () => {
     const response = await fetch(`${import.meta.env.VITE_API_URL}/rooms`);
-
     const data = await response.json();
     return data;
 };
 
-// Getting all the rooms:-
+// Getting filtered rooms:-
+export const getRooms = async (email) => {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/rooms/${email}`);
+    const data = await response.json();
+    return data;
+};
+
+// Getting a single rooms:-
 export const getRoom = async (id) => {
     const response = await fetch(`${import.meta.env.VITE_API_URL}/rooms/${id}`);
-
     const data = await response.json();
     return data;
 };
