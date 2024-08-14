@@ -1,6 +1,28 @@
 import { format } from 'date-fns';
+import { useState } from 'react';
+import DeleteModal from '../Modal/DeleteModal';
+import { deleteRoom } from '../../api/rooms';
+import toast from 'react-hot-toast';
 
 const RoomDataRow = ({ room, fetchRooms }) => {
+    const [isOpen, setIsOpen] = useState(false);
+
+    const closeModal = () => {
+        setIsOpen(false);
+    };
+
+    // Canceling a booking:--
+    const modalHandler = (id) => {
+        deleteRoom(id)
+            .then(data => {
+                console.log(data);
+                fetchRooms();
+                toast.success('Room deleted!');
+            }).catch(error => console.log(error));
+        closeModal();
+    };
+
+
   return (
     <tr>
       <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
@@ -36,13 +58,21 @@ const RoomDataRow = ({ room, fetchRooms }) => {
         </p>
       </td>
       <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-        <span className='relative cursor-pointer inline-block px-3 py-1 font-semibold text-green-900 leading-tight'>
+        <span
+            onClick={() => setIsOpen(true)} 
+         className='relative cursor-pointer inline-block px-3 py-1 font-semibold text-green-900 leading-tight'>
           <span
             aria-hidden='true'
             className='absolute inset-0 bg-red-200 opacity-50 rounded-full'
           ></span>
           <span className='relative'>Delete</span>
         </span>
+        <DeleteModal
+            isOpen={isOpen}
+            closeModal={closeModal}
+            modalHandler={modalHandler}
+            id={room._id}
+        ></DeleteModal>
       </td>
       <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
         <span className='relative cursor-pointer inline-block px-3 py-1 font-semibold text-green-900 leading-tight'>
