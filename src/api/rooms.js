@@ -33,3 +33,17 @@ export const getRoom = async (id) => {
     const data = await response.json();
     return data;
 };
+
+// Deleting a room:-
+export const deleteRoom = async (id) => {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/rooms/${id}`, {
+        method: 'DELETE',
+        headers: {
+            'content-type' : 'application/json',
+        },
+    });
+    const data = await response.json();
+    return data;
+};
+
+

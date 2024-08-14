@@ -6,7 +6,6 @@ import RoomDataRow from "../../components/Dashboard/RoomDataRow";
 const MyListings = () => {
     const {user} = useContext(AuthContext);
     const [rooms, setRooms] = useState([]);
-    console.log(rooms);
     
     const fetchRooms = () => {
         getRooms(user?.email).then(data => setRooms(data))
